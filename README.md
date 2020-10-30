@@ -2,7 +2,7 @@
 
 Requirements: [Docker Community Edition](https://www.docker.com/community-edition)
 
-To start the app run: ```sh 'docker-compose up' ```.
+To start the app run: ``` 'docker-compose up' ``` or ``` 'sudo docker-compose up' ```.
 
 It will then be started on port 7777.
 

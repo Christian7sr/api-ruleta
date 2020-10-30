@@ -1,21 +1,28 @@
-redis:
-    image: redis
-    container_name: cache
-    expose:
-        - 6379
+version: '2'
 
-app:
-    build: ./
-    volumes:
-        - ./:/app
-    ports:
-        - 7777:2112
-    links:
-        - redis
-    environment:
-        - REDIS_URL=redis://cache
-    environment:
-        - NODE_ENV=development
-        - PORT=7777
-    command:
-        sh -c 'npm i && npm start'
+services:
+    redis_db1:
+        image: redis:latest
+        container_name: redisDB
+        ports:
+            - "6379:6379"
+        environment:
+            - REDIS_URL=redis_db1://redisDB
+        volumes:
+            - 'roulette_data:/var/lib/redis_db1'
+        command: ["redis-server", "--bind", "redis_db1", "--port", "6379"]
+    app:
+        build: ./
+        volumes:
+            - ./:/app
+        ports:
+            - 7777:2112
+        links:
+            - redis_db1
+        depends_on: 
+            - redis_db1
+        command:
+            sh -c 'npm i && npm start'
+
+volumes:
+    roulette_data: {}
