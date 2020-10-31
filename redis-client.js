@@ -22,5 +22,6 @@ module.exports = {
   hmsetAsync: promisify(client.hmset).bind(client),
   hgetAsync: promisify(client.hget).bind(client),
   hgetAllAsync: promisify(client.hgetall).bind(client),
-  keysAsync: promisify(client.keys).bind(client)
+  keysAsync: promisify(client.keys).bind(client),
+  delAsync: promisify(client.del).bind(client)
 };
